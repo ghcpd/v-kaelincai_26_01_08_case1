@@ -1,0 +1,126 @@
+**Role & Objective**
+You are a senior software engineer tasked with fixing a regression bug in a Python shipping compliance engine, creating a complete fixed version in a specified workspace directory, and performing comprehensive full-project validation with detailed documentation of all runtime results and test outcomes.
+
+**Context**
+I have a buggy Python project in the current workspace with a regression in the constraint validation system. Orders with MIXED products (both hazardous AND fragile) fail to find valid shipping methods. The project structure is:
+
+```
+issue_project/
+├── src/
+│   ├── __init__.py
+│   ├── models.py
+│   ├── constraints.py
+│   ├── calculator.py
+│   ├── shipping_service.py
+│   └── exceptions.py
+├── tests/
+│   ├── __init__.py
+│   ├── test_constraint_validator.py
+│   └── test_shipping_service.py
+├── data/
+│   └── sample_orders.json
+├── requirements.txt
+├── README.md
+└── KNOWN_ISSUE.md
+```
+
+**Step-by-Step Instructions**
+
+1. **Analyze the Buggy Project**
+   - Review KNOWN_ISSUE.md for detailed bug analysis
+   - Examine source code to identify flawed logic in constraints
+   - Review failing tests to understand expected behavior
+   - Debug to locate the root cause
+
+2. **Create Fixed Project at Target Workspace Location**
+   - Create the complete fixed project at: C:\BugBash\workSpace3\Claude-haiku-4.5\issue_project_fixed
+   - DO NOT modify the original issue_project/ directory
+   - Maintain exact same structure as original
+
+3. **Apply the Constraint Validation Fix**
+   - Fix the logic bug in constraints.py so MIXED products return GROUND and PRIORITY_GROUND
+   - Ensure MIXED products do NOT return AIR transport
+   - Use constraint intersection logic instead of additive logic
+   - Ensure volumetric cost is calculated appropriately
+
+4. **Update Test Files**
+   - Remove all @pytest.mark.xfail decorators from test files
+   - Adjust test data (weights/volumes) as needed to ensure assertions work with the fix
+   - Retain all test assertions
+
+5. **Create Required Deliverables**
+   - Complete fixed project structure with all source files
+   - FIX_SUMMARY.md documenting root cause, changes, and validation
+   - Updated README.md indicating v2.0.1
+   - All supporting files (sample_orders.json, requirements.txt)
+
+6. **Execute Comprehensive System Validation**
+   - Verify project structure: confirm all 13 required files are present
+   - Install dependencies: pip install -r requirements.txt
+   - Run unit tests: pytest tests/ -v --tb=short
+   - Generate coverage report: pytest --cov=src --cov-report=term-missing
+   - Create and run integration test script validating:
+     * Normal products: 3 transport options (air, ground, priority_ground)
+     * Hazardous products: no AIR transport
+     * Fragile products: volumetric cost included
+     * Mixed products: GROUND and PRIORITY_GROUND, no AIR (REGRESSION TEST)
+     * Heavy products (>50kg): FREIGHT only
+     * Multiple mixed products: correct options
+     * Recommended shipping selection
+   - Create and run sample order processing test using real data from sample_orders.json
+   - Capture all execution outputs and logs
+
+7. **Verify System Behavior and Consistency**
+   - Confirm system launches and imports successfully
+   - Verify all 12 unit tests pass (100% pass rate)
+   - Verify integration tests pass for all real-world scenarios
+   - Confirm sample orders from JSON are processed correctly
+   - Validate code coverage is >95%
+   - Ensure no errors, exceptions, or warnings occur
+   - Confirm mixed products behave correctly in all scenarios
+
+8. **Document Complete Validation Results**
+   - Document test execution results (unit tests, integration tests, sample orders)
+   - Capture code coverage metrics
+   - Create comprehensive validation report showing all test outcomes
+   - List all scenarios tested and their results
+   - Provide final explicit statement: "All test cases passed"
+
+**Output Specification**
+- Fixed project at: C:\BugBash\workSpace3\Claude-haiku-4.5\issue_project_fixed
+- All 13 required source files with bug fix applied
+- Test files with xfail decorators removed
+- FIX_SUMMARY.md with comprehensive documentation
+- Updated README.md (v2.0.1)
+- Complete pytest output: 12/12 unit tests passing
+- Integration test script output showing all scenarios passing
+- Sample order test script output showing all orders processed
+- Code coverage report (>95%)
+- Comprehensive validation report documenting all results
+- Final status explicitly confirming: "All test cases passed"
+
+**Constraints & Preferences**
+- Use relative paths within project structure
+- Maintain exact same project structure as original
+- Keep all existing functionality intact
+- Fix should be minimal and focused on root cause
+- Do not add new dependencies beyond requirements.txt
+- Expected test count: 12 total unit tests
+- Expected integration scenarios: 7+ scenarios
+- Expected code coverage: >95%
+- All tests must pass: pytest tests/ -v --tb=short
+
+**Quality Gates - Verification Checklist**
+- ✓ All 12 unit tests pass (100% pass rate, 0 failures)
+- ✓ Project structure verified: all 13 required files present
+- ✓ MIXED products return exactly GROUND and PRIORITY_GROUND (no AIR)
+- ✓ Normal products return all 3 options: air, ground, priority_ground
+- ✓ Hazardous products exclude AIR transport
+- ✓ Heavy products (>50kg) return FREIGHT only
+- ✓ Volumetric cost calculated for fragile/mixed items
+- ✓ Integration tests pass for all real-world scenarios (7+)
+- ✓ Sample orders from JSON processed correctly (6+ orders)
+- ✓ Code coverage >95%
+- ✓ System launches and imports successfully
+- ✓ Zero errors, exceptions, or warnings during execution
+- ✓ Final validation explicitly states: "All test cases passed"
