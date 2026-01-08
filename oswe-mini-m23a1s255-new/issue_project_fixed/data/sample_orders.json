@@ -1,0 +1,16 @@
+{
+  "orders": [
+    {
+      "order_id": "O005",
+      "products": [
+        { "id": "P005", "name": "Battery-Powered Glass Lamp", "weight": 4.5, "volume": 0.012, "product_type": "MIXED" }
+      ]
+    },
+    {
+      "order_id": "O103",
+      "products": [
+        { "id": "P103", "name": "Wine Glasses Set", "weight": 2.0, "volume": 0.01, "product_type": "FRAGILE" }
+      ]
+    }
+  ]
+}

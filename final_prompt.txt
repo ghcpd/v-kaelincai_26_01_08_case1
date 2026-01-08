@@ -1,0 +1,122 @@
+**Role & Objective**
+You are a senior software engineer tasked with fixing a regression bug in a Python shipping compliance engine, creating a complete fixed version in a specified workspace, and performing comprehensive validation of the finished solution.
+
+**Context**
+I have a buggy Python project in the current workspace with a regression in the constraint validation system. Orders with MIXED products (both hazardous AND fragile) fail to find valid shipping methods. The project structure is:
+
+```
+issue_project/
+├── src/
+│   ├── __init__.py
+│   ├── models.py
+│   ├── constraints.py
+│   ├── calculator.py
+│   ├── shipping_service.py
+│   └── exceptions.py
+├── tests/
+│   ├── __init__.py
+│   ├── test_constraint_validator.py
+│   └── test_shipping_service.py
+├── data/
+│   └── sample_orders.json
+├── requirements.txt
+├── README.md
+└── KNOWN_ISSUE.md
+```
+
+**Step-by-Step Instructions**
+
+1. **Analyze the Buggy Project**
+   - Review KNOWN_ISSUE.md for detailed bug analysis
+   - Examine source code to identify flawed logic
+   - Review failing tests to understand expected behavior
+   - Debug to locate the root cause
+
+2. **Create Fixed Version at Target Workspace**
+   - Create fixed project at: C:\BugBash\workSpace1\oswe-mini-m23a1s255-new\issue_project_fixed
+   - DO NOT modify the original issue_project/ directory
+   - Maintain exact same structure as original
+
+3. **Apply the Constraint Validation Fix**
+   - Fix logic bug so MIXED products (hazardous + fragile) return GROUND and PRIORITY_GROUND
+   - Ensure MIXED products do NOT return AIR transport
+   - Adjust volumetric weight calculation for MIXED orders to reflect reinforced packaging
+   - Ensure volumetric cost is applied appropriately
+
+4. **Update Test Files**
+   - Remove all @pytest.mark.xfail decorators from test files
+   - test_constraint_validator.py - remove xfail markers
+   - test_shipping_service.py - remove xfail markers
+   - Retain all test assertions
+
+5. **Create Required Deliverables**
+   - Complete fixed project with all source files
+   - FIX_SUMMARY.md documenting:
+     * Root cause analysis
+     * What was changed and why
+     * Which files and components were modified
+     * How the fix addresses the root cause
+   - Updated README.md indicating v2.0.1 (fixed version)
+   - KNOWN_ISSUE.md copied from original
+   - data/sample_orders.json and requirements.txt copied
+
+6. **Execute Full Project Validation**
+   - Configure Python environment for the fixed project
+   - Install dependencies: pip install -r requirements.txt
+   - Create and run a smoke test that:
+     * Instantiates a MIXED product (hazardous + fragile)
+     * Calls ShippingService.calculate_shipping_options()
+     * Prints available transport modes and volumetric costs
+     * Confirms MIXED products return ground options (no AIR)
+   - Run complete test suite: pytest tests/ -v --tb=short
+   - Capture all outputs and logs
+
+7. **Verify Expected Behavior**
+   - MIXED products must return GROUND and PRIORITY_GROUND
+   - MIXED products must NOT return AIR
+   - Volumetric costs must be applied for fragile/mixed items
+   - Overweight (>50kg) orders must return FREIGHT only
+   - System must launch without errors
+   - All automated tests must pass (12 tests total)
+
+8. **Document Validation Results**
+   - Capture smoke test output showing MIXED product behavior
+   - Capture pytest output showing all tests passing
+   - Summarize runtime results
+   - Explicitly state: "All test cases passed"
+
+**Output Specification**
+- Fixed project at: C:\BugBash\workSpace1\oswe-mini-m23a1s255-new\issue_project_fixed
+- All source files with bug fix applied
+- Test files with xfail decorators removed
+- FIX_SUMMARY.md with comprehensive documentation
+- Updated README.md (v2.0.1)
+- Smoke test execution output showing:
+  - MIXED product transport modes returned
+  - Volumetric costs applied
+  - No AIR included for MIXED products
+- Complete pytest output: 12 passed, 0 failed
+- Final validation summary explicitly confirming all tests passed
+
+**Constraints & Preferences**
+- Use relative paths within project structure
+- Do not use absolute paths like c:\
+- Maintain exact same project structure as original
+- Keep all existing functionality intact
+- Fix should be minimal and focused on root cause
+- Do not add new dependencies beyond requirements.txt
+- Expected test count: 12 total automated tests
+- All tests must pass: pytest tests/ -v --tb=short
+
+**Quality Gates - Verification Checklist**
+- ✓ All 12 automated tests pass with pytest (no failures, no xfail)
+- ✓ MIXED products return GROUND and PRIORITY_GROUND options
+- ✓ MIXED products do NOT include AIR transport
+- ✓ Volumetric cost is calculated for fragile/mixed items
+- ✓ Hazardous products exclude AIR transport
+- ✓ Heavy orders (>50kg) return FREIGHT only
+- ✓ Normal orders return air, ground, and priority_ground
+- ✓ Smoke test validates MIXED product behavior
+- ✓ System launches successfully without errors
+- ✓ Behavior is consistent across all test scenarios
+- ✓ Final validation explicitly states: "All test cases passed"
