@@ -1,0 +1,101 @@
+**Role & Objective**
+You are a senior software engineer tasked with fixing a regression bug in a Python shipping compliance engine, creating a fixed version of the project, and performing a complete validation of the finished solution.
+
+**Context**
+I have a buggy Python project located in the current workspace with a regression in the constraint validation system. Orders with MIXED products (both hazardous AND fragile) fail to find valid shipping methods. The project structure is:
+
+```
+issue_project/
+├── src/
+│   ├── __init__.py
+│   ├── models.py
+│   ├── constraints.py
+│   ├── calculator.py
+│   ├── shipping_service.py
+│   └── exceptions.py
+├── tests/
+│   ├── __init__.py
+│   ├── test_constraint_validator.py
+│   └── test_shipping_service.py
+├── data/
+│   └── sample_orders.json
+├── requirements.txt
+├── README.md
+└── KNOWN_ISSUE.md
+```
+
+**Step-by-Step Instructions**
+
+1. **Analyze the Buggy Project**
+   - Review KNOWN_ISSUE.md to understand the bug analysis
+   - Examine source code to identify the flawed logic
+   - Review failing tests to understand expected behavior
+   - Debug the code to locate the root cause
+
+2. **Create a Fixed Version in New Directory (issue_project_fixed)**
+   - DO NOT modify the original issue_project/ directory
+   - Create a complete fixed project maintaining the exact same structure
+   - Fix the logic bug in the constraint validation system
+   - Ensure MIXED products return GROUND and PRIORITY_GROUND options
+   - Ensure MIXED products do NOT return AIR transport
+   - Ensure volumetric cost calculation remains functional for fragile items
+   - Remove all @pytest.mark.xfail decorators from test files
+
+3. **Specific Deliverables**
+   - Complete fixed project directory (issue_project_fixed/) with all source files
+   - Updated test files with xfail decorators removed
+   - FIX_SUMMARY.md documenting:
+     * Root cause analysis
+     * What was changed and why
+     * Which files and components were modified
+     * How the fix addresses the root cause
+   - Updated README.md indicating this is v2.0.1 (fixed version)
+
+4. **Full Project Validation**
+   - Run the complete automated test suite: `pytest tests/ -v --tb=short`
+   - Verify the system launches without errors
+   - Execute all test cases and ensure they all pass
+   - Create and run a smoke test script that:
+     * Loads and processes all sample orders from sample_orders.json
+     * Validates key scenarios (mixed products, fragile, hazardous, heavy orders)
+     * Verifies mixed products return ground options without AIR
+     * Confirms volumetric costs are applied appropriately
+   - Capture all outputs, logs, and any error traces
+   - Confirm consistent behavior across all test scenarios
+
+5. **Runtime & Verification Output**
+   - Execute pytest to confirm all tests pass
+   - Execute smoke test to validate runtime behavior
+   - Document the test results clearly
+   - Explicitly state whether all test cases passed (must pass all tests)
+
+**Output Specification**
+- Fixed project directory structure: issue_project_fixed/
+- All source code files with the bug fix applied
+- Test files with xfail decorators removed
+- FIX_SUMMARY.md with comprehensive fix documentation
+- Updated README.md version 2.0.1
+- Complete pytest output showing all tests passing
+- Smoke test output validating all key scenarios
+- Final summary explicitly confirming: "All test cases passed"
+
+**Constraints & Preferences**
+- Use relative paths only (no absolute paths like `c:\...`)
+- Maintain exact same project structure as original
+- Keep all existing functionality intact
+- Fix should be minimal and focused on root cause
+- Do not add new dependencies beyond what's in requirements.txt
+- All tests must pass: `pytest tests/ -v`
+- Expected test count: All automated tests must pass
+
+**Quality Gates - Verification Checklist**
+- ✓ All automated tests pass with pytest (no failures, no xfail)
+- ✓ Mixed products return GROUND and PRIORITY_GROUND options
+- ✓ Mixed products do NOT include AIR transport
+- ✓ Volumetric cost is calculated for fragile/mixed items
+- ✓ Hazardous products exclude AIR transport
+- ✓ Heavy orders return FREIGHT only
+- ✓ Normal orders return air, ground, priority_ground
+- ✓ System launches and executes without errors
+- ✓ Smoke test validates all sample orders successfully
+- ✓ Final summary explicitly states: "All test cases passed"
