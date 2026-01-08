@@ -1,0 +1,61 @@
+**Role & Objective**
+You are a senior software engineer tasked with fixing a regression bug in a Python shipping compliance engine and validating the completed fix.
+
+**Context**
+I have a buggy Python project with a regression in the constraint validation system. Orders with MIXED products (both hazardous AND fragile) fail to find valid shipping methods.
+
+**Step-by-Step Instructions**
+
+1. **Analyze the Buggy Project**
+   - Review the KNOWN_ISSUE.md document to understand the bug analysis
+   - Examine the source code to identify the flawed logic
+   - Review failing tests to understand expected behavior
+   - Debug the code to locate the root cause
+
+2. **Create a Fixed Version**
+   - Create a complete fixed project at a new location (do not modify the original issue_project/ directory)
+   - Maintain the exact same project structure as the original
+   - Fix the logic bug in the constraint validation system
+   - Ensure MIXED products (hazardous + fragile) return valid shipping options: GROUND and PRIORITY_GROUND
+   - Ensure MIXED products do NOT return AIR transport (hazardous constraint)
+   - Ensure volumetric cost calculation remains functional for fragile items
+   - Remove all @pytest.mark.xfail decorators from test files
+   - Ensure no existing passing tests break
+
+3. **Required Deliverables in Fixed Project**
+   - Complete project structure with src/, tests/, and data/ directories
+   - Fixed constraint validation system
+   - Updated test files with xfail decorators removed
+   - Updated README.md indicating this is the fixed version (v2.0.1)
+   - FIX_SUMMARY.md documenting the root cause, what was changed, and why
+
+4. **Full Validation of Completed Project**
+   - Run the entire project using the provided environment setup and execution scripts
+   - Verify that the system launches successfully without errors
+   - Execute all automated test cases and ensure they all pass
+   - Capture the outputs, logs, and any error traces if failures occur
+   - Confirm that the project meets the expected functionality and behaves consistently under all provided test scenarios
+   - Summarize the runtime results and explicitly state whether all test cases passed
+
+**Output Specification**
+- Fixed project directory with complete source code, tests, and documentation
+- All tests must PASS (11 tests total, no xfail, no failures)
+- FIX_SUMMARY.md with clear documentation of changes
+- Runtime validation logs showing all 11 tests passing
+- Demo/validation output demonstrating correct behavior for mixed products
+
+**Constraints & Preferences**
+- Use relative paths only (no absolute paths)
+- Maintain the exact same project structure as original
+- Keep all existing functionality intact
+- Fix should be minimal and focused on root cause
+- Do not add new dependencies
+- All tests must pass: pytest tests/ -v
+
+**Quality Gates**
+- Verify: All 11 tests pass with pytest tests/ -v
+- Verify: Mixed products return GROUND and PRIORITY_GROUND
+- Verify: Mixed products do NOT return AIR
+- Verify: Volumetric cost is applied for fragile/mixed items
+- Verify: All validation and runtime outputs show successful execution
+- Explicitly confirm: "All test cases passed" in final summary
