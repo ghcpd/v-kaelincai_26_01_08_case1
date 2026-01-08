@@ -1,0 +1,91 @@
+[
+  {
+    "order_id": "ORD-2026-001",
+    "description": "Normal product - should work fine",
+    "products": [
+      {
+        "id": "PROD-BOOK-001",
+        "name": "Python Programming Book",
+        "weight": 0.8,
+        "volume": 0.003,
+        "product_type": "normal"
+      }
+    ]
+  },
+  {
+    "order_id": "ORD-2026-002",
+    "description": "Hazardous product - should exclude air transport",
+    "products": [
+      {
+        "id": "PROD-BATT-001",
+        "name": "Lithium-Ion Battery Pack",
+        "weight": 2.5,
+        "volume": 0.006,
+        "product_type": "hazardous"
+      }
+    ]
+  },
+  {
+    "order_id": "ORD-2026-003",
+    "description": "Fragile product - should include volumetric cost",
+    "products": [
+      {
+        "id": "PROD-GLASS-001",
+        "name": "Crystal Wine Glasses (Set of 6)",
+        "weight": 3.2,
+        "volume": 0.015,
+        "product_type": "fragile"
+      }
+    ]
+  },
+  {
+    "order_id": "ORD-2026-004",
+    "description": "REGRESSION CASE: Mixed product - FIXED",
+    "products": [
+      {
+        "id": "PROD-LAMP-001",
+        "name": "Battery-Powered Glass Decorative Lamp",
+        "weight": 4.5,
+        "volume": 0.012,
+        "product_type": "mixed"
+      }
+    ],
+    "expected_behavior": "Should return GROUND and PRIORITY_GROUND options",
+    "actual_behavior": "Now returns ground-based options including PRIORITY_GROUND"
+  },
+  {
+    "order_id": "ORD-2026-005",
+    "description": "Heavy product - should use freight only",
+    "products": [
+      {
+        "id": "PROD-MACH-001",
+        "name": "Industrial Compressor",
+        "weight": 85.0,
+        "volume": 0.3,
+        "product_type": "normal"
+      }
+    ]
+  },
+  {
+    "order_id": "ORD-2026-006",
+    "description": "REGRESSION CASE: Multiple mixed products",
+    "products": [
+      {
+        "id": "PROD-LAMP-002",
+        "name": "LED Glass Table Lamp",
+        "weight": 3.8,
+        "volume": 0.010,
+        "product_type": "mixed"
+      },
+      {
+        "id": "PROD-FRAME-001",
+        "name": "Electronic Glass Photo Frame",
+        "weight": 1.2,
+        "volume": 0.004,
+        "product_type": "mixed"
+      }
+    ],
+    "expected_behavior": "Should return ground-based options with volumetric cost",
+    "actual_behavior": "Now returns ground-based options including PRIORITY_GROUND"
+  }
+]
