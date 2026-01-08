@@ -1,0 +1,113 @@
+**Role & Objective**
+You are a senior software engineer tasked with fixing a regression bug in a Python shipping compliance engine, creating a fixed version of the project at a specified workspace location, and performing a complete validation of the finished solution.
+
+**Context**
+I have a buggy Python project located in the current workspace with a regression in the constraint validation system. Orders with MIXED products (both hazardous AND fragile) fail to find valid shipping methods. The project structure is:
+
+```
+issue_project/
+├── src/
+│   ├── __init__.py
+│   ├── models.py
+│   ├── constraints.py
+│   ├── calculator.py
+│   ├── shipping_service.py
+│   └── exceptions.py
+├── tests/
+│   ├── __init__.py
+│   ├── test_constraint_validator.py
+│   └── test_shipping_service.py
+├── data/
+│   └── sample_orders.json
+├── requirements.txt
+├── README.md
+└── KNOWN_ISSUE.md
+```
+
+**Step-by-Step Instructions**
+
+1. **Analyze the Buggy Project**
+   - Review KNOWN_ISSUE.md to understand the detailed bug analysis
+   - Examine the source code to identify the flawed logic in constraints
+   - Review failing tests to understand expected behavior
+   - Debug the code to locate the root cause
+
+2. **Create Fixed Version at Target Workspace Location**
+   - Create the fixed project directory at: C:\BugBash\workSpace2\oswe-mini-m23a3s430
+   - Within this location, create: oswe-mini-m23a3s430/issue_project_fixed/
+   - DO NOT modify the original issue_project/ directory
+   - Maintain the exact same project structure as the original
+
+3. **Apply the Fix to Constraint Validation System**
+   - Fix the logic bug so MIXED products (hazardous + fragile) return GROUND and PRIORITY_GROUND options
+   - Ensure MIXED products do NOT return AIR transport (hazardous constraint)
+   - Adjust volumetric weight calculation for mixed orders to reflect reinforced packaging
+   - Ensure volumetric cost is calculated appropriately for fragile and mixed items
+
+4. **Update Test Files**
+   - Remove all @pytest.mark.xfail decorators from test files
+   - test_constraint_validator.py - remove xfail markers
+   - test_shipping_service.py - remove xfail markers
+   - Retain all test assertions
+
+5. **Create Deliverables in Fixed Project**
+   - Complete fixed project structure with all source files
+   - FIX_SUMMARY.md documenting:
+     * Root cause analysis
+     * What was changed and why
+     * Which files and components were modified
+     * How the fix addresses the root cause
+   - Updated README.md indicating this is v2.0.1 (fixed version)
+   - Sample data and requirements.txt copied from original
+
+6. **Full Project Validation**
+   - Install dependencies: pip install -r requirements.txt
+   - Run the complete automated test suite: pytest tests/ -v --tb=short
+   - Verify all tests pass without failures or xfail markers
+   - Create and execute a demo script (run_demo.py) that:
+     * Exercises normal, fragile, hazardous, and mixed product scenarios
+     * Validates that mixed products return correct shipping options
+     * Confirms GROUND and PRIORITY_GROUND are present, AIR is absent
+     * Verifies volumetric costs are applied appropriately
+   - Capture all outputs, logs, and validation results
+   - Document that the system launches successfully without errors
+
+7. **Runtime Verification & Reporting**
+   - Execute pytest command and capture complete output
+   - Run demo script to validate runtime behavior on all sample orders
+   - Confirm all automated tests pass (expected: 12 passed)
+   - Verify behavior consistency across all test scenarios
+   - Provide explicit final statement: "All test cases passed"
+
+**Output Specification**
+- Fixed project directory: C:\BugBash\workSpace2\oswe-mini-m23a3s430/issue_project_fixed/
+- Complete source code with bug fix applied
+- Test files with xfail decorators removed
+- FIX_SUMMARY.md with comprehensive root cause and fix documentation
+- Updated README.md version 2.0.1
+- Complete pytest output showing all automated tests passing (12 passed, 0 failed)
+- Demo script output validating all key scenarios
+- Final summary explicitly confirming: "All test cases passed"
+
+**Constraints & Preferences**
+- Use relative paths within the project structure
+- Do not use absolute paths like c:\...
+- Maintain exact same project structure as original
+- Keep all existing functionality intact
+- Fix should be minimal and focused on root cause only
+- Do not add new dependencies beyond those in requirements.txt
+- All tests must pass: pytest tests/ -v --tb=short
+- Expected automated test count: 12 tests total
+
+**Quality Gates - Verification Checklist**
+- ✓ All automated tests pass with pytest (12/12, no failures, no xfail markers)
+- ✓ MIXED products return GROUND and PRIORITY_GROUND options
+- ✓ MIXED products do NOT include AIR transport
+- ✓ Volumetric cost is calculated for fragile/mixed items
+- ✓ Hazardous products exclude AIR transport
+- ✓ Heavy orders return FREIGHT only
+- ✓ Normal orders return air, ground, and priority_ground
+- ✓ System launches successfully without errors
+- ✓ Demo script validates all sample order scenarios
+- ✓ Behavior is consistent across all test cases
+- ✓ Final validation confirms: "All test cases passed"
